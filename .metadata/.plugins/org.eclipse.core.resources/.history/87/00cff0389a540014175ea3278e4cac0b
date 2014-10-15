@@ -1,0 +1,47 @@
+import java.util.ArrayList;
+
+
+public class Solution{
+	
+}
+
+
+class QuadTree {
+	public static final int k_initialRadius = 1;
+	public static final int	k_radiusMultiplier = 2;
+	ArrayList<Topic> s_topics;
+	int depth;
+	ArrayList<Topic> in_nw;
+	ArrayList<Topic> in_sw;
+	ArrayList<Topic> in_ne;
+	ArrayList<Topic> in_se;
+	double cx, cy;
+	QuadTree(ArrayList<Topic> topics, int depth){
+		this.s_topics = new ArrayList<Topic>();
+		this.depth = depth;
+		this.in_nw = new ArrayList<Topic>();
+		this.in_sw = new ArrayList<Topic>();
+		this.in_ne = new ArrayList<Topic>();
+		this.in_se = new ArrayList<Topic>();
+	}
+}
+
+class Topic{
+	int id;
+	double x;
+	double y;
+	ArrayList<Integer> questions;
+	Topic(int id, double x, double y){
+		this.id = id;
+		this.x = x;
+		this.y = y;
+		this.questions = new ArrayList<Integer>();
+	}
+	void addQuestion(int qnum){
+		this.questions.add(qnum);
+	}
+}
+
+class Rect{
+	
+}

@@ -1,0 +1,29 @@
+import java.util.ArrayList;
+
+
+public class Solution{
+	
+}
+
+
+class QuadTree {
+	public static final int k_initialRadius = 1;
+	public static final int	k_radiusMultiplier = 2;
+	
+}
+
+class Topic{
+	int id;
+	double x;
+	double y;
+	ArrayList<Integer> questions;
+	Topic(int id, double x, double y){
+		this.id = id;
+		this.x = x;
+		this.y = y;
+		this.questions = new ArrayList<Integer>();
+	}
+	void addQuestion(int qnum){
+		this.questions.add(qnum);
+	}
+}

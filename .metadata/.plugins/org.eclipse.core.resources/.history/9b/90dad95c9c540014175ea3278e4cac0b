@@ -1,0 +1,129 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
+
+public class Solution{
+	
+}
+
+
+class QuadTree {
+	public static final int k_initialRadius = 1;
+	public static final int	k_radiusMultiplier = 2;
+	ArrayList<Topic> s_topics;
+	ArrayList<Topic> nw_topics;
+	ArrayList<Topic> sw_topics;
+	ArrayList<Topic> ne_topics;
+	ArrayList<Topic> se_topics;
+	double cx, cy;
+	QuadTree nw, ne, se, sw;
+	QuadTree(ArrayList<Topic> topics, int depth, BoundRect br){
+		depth -= 1;
+		if(depth==0){
+			this.s_topics = topics;
+			return;
+		}
+		this.s_topics = new ArrayList<Topic>();
+		this.nw_topics = new ArrayList<Topic>();
+		this.sw_topics = new ArrayList<Topic>();
+		this.ne_topics = new ArrayList<Topic>();
+		this.se_topics = new ArrayList<Topic>();
+		
+		//Get the bounding rect
+		double l, t, r, b;
+		if(br!=null){
+			l = br.l;
+			t = br.t;
+			r = br.r;
+			b = br.b;
+		}
+		else{
+			l=Double.MAX_VALUE;
+			t=Double.MAX_VALUE;
+			r=Double.MIN_VALUE;
+			b=Double.MIN_VALUE;
+			for(Topic to: topics){
+				l = Math.min(l, to.x);
+				t = Math.min(t, to.y);
+				r = Math.max(r, to.x);
+				b = Math.max(b, to.y);
+			}
+		}
+		//Cal the center
+		this.cx = (l+r)/2;
+		this.cy = (t+b)/2;
+		
+		for(Topic to: topics){
+			boolean in_nw = to.x <=cx && to.y<=cy;
+			boolean in_sw = to.x <=cx && to.y>=cy;
+			boolean in_ne = to.x >=cx && to.y<=cy;
+			boolean in_se = to.x >=cx && to.y>=cy;
+			
+			if(in_nw&&in_sw&&in_ne&&in_se)
+				this.s_topics.add(to);
+			else{
+				if(in_nw)
+					this.nw_topics.add(to);
+				if(in_sw)
+					this.sw_topics.add(to);
+				if(in_se)
+					this.se_topics.add(to);
+				if(in_ne)
+					this.ne_topics.add(to);
+			}
+		}
+		if(nw_topics.size()>0)
+			this.nw = new QuadTree(nw_topics,depth,new BoundRect(l,t,cx,cy));
+		if(ne_topics.size()>0)
+			this.ne = new QuadTree(ne_topics,depth,new BoundRect(cx,t,r,cy));
+	    if(se_topics.size()>0)
+	        this.se = new QuadTree(se_topics,depth,new BoundRect(cx,cy,r,b));
+	    if(sw_topics.size()>0)
+	        this.sw = new QuadTree(sw_topics,depth,new BoundRect(l,cy,cx,b));
+	}
+	HashMap<Topic, Double> getPoints(double x, double y, double radius){
+		Rect rect = new Rect(x, y, radius);
+		return getPointsFunction(x,y,radius,rect);
+	}
+	
+	HashMap<Topic, Double> getPointsFunction(double x, double y, double radius,Rect rect){
+		
+		return null;
+	}
+}
+
+class Topic{
+	int id;
+	double x;
+	double y;
+	ArrayList<Integer> questions;
+	Topic(int id, double x, double y){
+		this.id = id;
+		this.x = x;
+		this.y = y;
+		this.questions = new ArrayList<Integer>();
+	}
+	void addQuestion(int qnum){
+		this.questions.add(qnum);
+	}
+}
+
+class Rect{
+	double left, right, top, bottom;
+	Rect(double x, double y, double radius){
+		this.left = Math.max(0,x-radius);
+		this.right = x+radius;
+		this.top = Math.max(0, y-radius);
+		this.bottom = y+radius;
+	}
+}
+
+class BoundRect{
+	double l,t,r,b;
+	BoundRect(double l, double t, double r, double b){
+		this.l = l;
+		this.t = t;
+		this.r = r;
+		this.b = b;
+	}
+}

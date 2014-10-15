@@ -1,0 +1,11 @@
+
+public class Solution{
+	
+}
+
+
+class QuadTree {
+	public static final int k_initialRadius = 1;
+	public static final int	k_radiusMultiplier = 2;
+	
+}
