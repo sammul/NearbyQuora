@@ -16,18 +16,6 @@ There will be Q lines following that, each with a question id integer and number
 The next N lines will consist of a char, an integer and two doubles each, representing the type of results required ("t" for topic or "q" for question), the number of results required, and the location to be used as the query.
 
 Sample Input:
- 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
 3 6 2
 0 0.0 0.0
 1 1.0 1.0
