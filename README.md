@@ -65,5 +65,3 @@ You should aim to have your algorithm be fast enough to solve our largest test i
 
 Notes
 Location data will be specified as cartesian co-ordinates on a plane for simplicity.  In reality, our infrastructure utilizes the Haversine formula (http://www.movable-type.co.uk/sc...) to convert these co-ordinates.
-
-
