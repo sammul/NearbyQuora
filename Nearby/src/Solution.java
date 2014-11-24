@@ -1,11 +1,9 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 public class Solution{
 	
 }
-
 
 class QuadTree {
 	public static final double initRadius = 1;
